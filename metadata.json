@@ -1,0 +1,6 @@
+{
+  "name": "GeoGrapher UTM - Mapping & Geometry Tool",
+  "description": "A precision mapping tool for coordinate plotting (UTM and Decimal), polygon offsets, snapping, and realistic satellite imagery with area/perimeter calculations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
