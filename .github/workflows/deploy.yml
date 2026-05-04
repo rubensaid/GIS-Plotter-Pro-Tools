@@ -39,5 +39,5 @@ jobs:
           local-dir: ./dist/
           # Al usar el usuario principal, debemos especificar la ruta completa desde el home
           server-dir: ./gisprotools.rubenfelix.ing/ 
-          protocol: sftp
+          protocol: ftps
           port: 21
