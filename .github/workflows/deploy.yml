@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: ./
-          protocol: ftp
+          protocol: ftp # Forzamos FTP estándar
           port: 21
-          # Namecheap a veces requiere esto para no desconectarse
-          dangerous-clean-slate: false
+          log-level: verbose # Para ver exactamente dónde se traba
+          security: loose # Esto ayuda si el certificado de Namecheap da problemas
