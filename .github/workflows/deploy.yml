@@ -30,15 +30,14 @@ jobs:
         run: npm run build
 
       # 5. Sube solo la carpeta "dist" a Namecheap vía FTP
-      - name: 🚀 Desplegar vía FTP
+      - name: 🚀 Desplegar vía SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ./
-          protocol: ftp # Forzamos FTP estándar
+          # Al usar el usuario principal, debemos especificar la ruta completa desde el home
+          server-dir: ./gisprotools.rubenfelix.ing/ 
+          protocol: sftp
           port: 21
-          log-level: verbose # Para ver exactamente dónde se traba
-          security: loose # Esto ayuda si el certificado de Namecheap da problemas
