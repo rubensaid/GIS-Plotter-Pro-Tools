@@ -1,0 +1,40 @@
+name: Deploy to Namecheap
+
+# Esto le dice a GitHub que ejecute la acción cuando hagas "push" a la rama "main"
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descarga tu código en el servidor virtual de GitHub
+      - name: 🚚 Obtener el código
+        uses: actions/checkout@v4
+
+      # 2. Instala Node.js versión 20
+      - name: 🟢 Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Instala las dependencias (npm install)
+      - name: 📦 Instalar dependencias
+        run: npm install
+
+      # 4. Compila el proyecto con Vite (genera la carpeta dist)
+      - name: 🛠️ Construir el proyecto (Build)
+        run: npm run build
+
+      # 5. Sube solo la carpeta "dist" a Namecheap vía FTP
+      - name: 🚀 Desplegar vía FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/    # Solo sube el resultado compilado
+          server-dir: ./        # Lo sube a la raíz del usuario FTP que creamos

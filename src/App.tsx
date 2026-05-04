@@ -271,19 +271,25 @@ export default function App() {
   };
 
   const downloadKml = () => {
-    const kml = exportToKml(shapes.filter(s => s.visible));
+    const shapeToExport = shapes.find(s => s.id === selectedShapeId);
+    if (!shapeToExport) return;
+    
+    const kml = exportToKml([shapeToExport]);
     const blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'export.kml';
+    a.download = `${shapeToExport.name}.kml`;
     a.click();
   };
 
   const copyCoordTable = () => {
-    const table = exportToCoordinateTable(shapes.filter(s => s.visible));
+    const shapeToCopy = shapes.find(s => s.id === selectedShapeId);
+    if (!shapeToCopy) return;
+
+    const table = exportToCoordinateTable([shapeToCopy]);
     navigator.clipboard.writeText(table).then(() => {
-      alert('Cuadro de coordenadas copiado al portapapeles');
+      alert(`Cuadro de coordenadas de "${shapeToCopy.name}" copiado al portapapeles`);
     });
   };
 
@@ -922,19 +928,22 @@ export default function App() {
            <div className="p-6 bg-[#111111] border-t border-[#2a2a2a] space-y-3">
               <button 
                 onClick={downloadKml}
-                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-xl text-[10px] uppercase tracking-[0.2em] transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2"
+                disabled={!selectedShapeId}
+                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-30 disabled:grayscale text-white font-black rounded-xl text-[10px] uppercase tracking-[0.2em] transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4" /> Exportar KML / KMZ
               </button>
               <button 
                 onClick={copyCoordTable}
-                className="w-full py-3 bg-white hover:bg-blue-50 text-black font-black rounded-xl text-[10px] uppercase tracking-[0.2em] transition-all shadow-sm flex items-center justify-center gap-2"
+                disabled={!selectedShapeId}
+                className="w-full py-3 bg-white hover:bg-blue-50 disabled:opacity-30 text-black font-black rounded-xl text-[10px] uppercase tracking-[0.2em] transition-all shadow-sm flex items-center justify-center gap-2"
               >
                 <Clipboard className="w-4 h-4" /> Copiar Tabla
               </button>
               <button 
                 onClick={() => setSelectedShapeId(null)}
-                className="w-full py-3 border border-[#333] text-[#666] hover:text-white hover:border-[#666] font-bold rounded-xl text-[10px] uppercase tracking-widest transition-all"
+                disabled={!selectedShapeId}
+                className="w-full py-3 border border-[#333] text-[#666] hover:text-white hover:border-[#666] disabled:opacity-0 font-bold rounded-xl text-[10px] uppercase tracking-widest transition-all"
               >
                 Deseleccionar
               </button>
