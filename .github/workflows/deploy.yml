@@ -19,7 +19,7 @@ jobs:
       - name: 🟢 Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       # 3. Instala las dependencias (npm install)
       - name: 📦 Instalar dependencias
@@ -36,5 +36,9 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/    # Solo sube el resultado compilado
-          server-dir: ./        # Lo sube a la raíz del usuario FTP que creamos
+          local-dir: ./dist/
+          server-dir: ./
+          protocol: ftp
+          port: 21
+          # Namecheap a veces requiere esto para no desconectarse
+          dangerous-clean-slate: false
