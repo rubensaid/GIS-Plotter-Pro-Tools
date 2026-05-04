@@ -313,7 +313,7 @@ export default function App() {
             <MapIcon className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-sm font-bold tracking-[0.2em] uppercase text-white">GEO-POLY V4</h1>
+            <h1 className="text-sm font-bold tracking-[0.2em] uppercase text-white">GIS PRO TOOLS</h1>
             <p className="text-[10px] text-[#666] uppercase tracking-wider font-medium">Cartografía de Precisión</p>
           </div>
         </div>

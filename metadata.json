@@ -1,6 +1,6 @@
 {
-  "name": "GeoGrapher UTM - Mapping & Geometry Tool",
-  "description": "A precision mapping tool for coordinate plotting (UTM and Decimal), polygon offsets, snapping, and realistic satellite imagery with area/perimeter calculations.",
+  "name": "GIS Pro Tools",
+  "description": "Herramienta avanzada de cartografía y geometría para trazado de coordenadas UTM/Decimal, offsets de polígonos, snapping e imágenes satelitales.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
